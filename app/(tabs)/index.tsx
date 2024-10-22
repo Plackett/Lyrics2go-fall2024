@@ -1,0 +1,27 @@
+import { Stack } from 'expo-router';
+import { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
+
+export default function Home() {
+  const [text, setText] = useState('');
+
+  const handleInputChange = (input) => {
+    setText(input);
+  }
+
+  const handleSubmit = () => {
+    alert(`You entered: ${text}`);
+  }
+
+  return (
+    <>
+      <Stack.Screen options={{ title: 'Home' }} />
+      <Text className='text-4xl ml-auto mr-auto top-1/4'>Welcome to Lyrics2go!</Text>
+      <View className='flex p-6 w-full h-full justify-center items-center'>
+        <TextInput className="border-teal-300 border-2 pl-1.5 pr-1.5 size-auto font-black text-3xl rounded-2xl bg-emerald-200" onChangeText={handleInputChange} value={text} placeholder="Enter the name of a song"/>
+        <Button title="Search" onPress={handleSubmit}/>
+      </View>
+    </>
+  );
+}
+

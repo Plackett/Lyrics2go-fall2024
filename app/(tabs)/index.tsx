@@ -10,6 +10,7 @@ export default function Home() {
   }
 
   const handleSubmit = () => {
+    // TODO: add code here to handle song searching
     alert(`You entered: ${text}`);
   }
 

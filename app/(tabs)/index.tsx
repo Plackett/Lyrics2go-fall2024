@@ -1,6 +1,7 @@
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
+import { colorScheme, useColorScheme } from "nativewind";
 
 export default function Home() {
   const [text, setText] = useState('');
@@ -13,6 +14,9 @@ export default function Home() {
     // TODO: add code here to handle song searching
     alert(`You entered: ${text}`);
   }
+
+  const { setColorScheme } = useColorScheme();
+  setColorScheme("system");
 
   return (
     <>

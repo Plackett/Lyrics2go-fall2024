@@ -1,7 +1,12 @@
 import { Stack } from 'expo-router';
 import { View, Text } from 'react-native';
+import { colorScheme, useColorScheme } from "nativewind";
 
 export default function Playlists() {
+
+  const { setColorScheme } = useColorScheme();
+  setColorScheme("system");
+
   return (
     <>
       <Stack.Screen options={{ title: 'Playlists' }} />

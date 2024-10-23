@@ -1,0 +1,24 @@
+I think Ima use the useNavigation() method to navigate through the app bc it's simple
+
+useNavigation() method example:
+
+import * as React from 'react';
+import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+function MyBackButton() {
+  const navigation = useNavigation();
+
+  return (
+    <Button
+      title="Back"
+      onPress={() => {
+        navigation.goBack();
+      }}
+    />
+  );
+}
+
+
+also, i think using a drawer instead of a tabbar is better because it's more widely used;
+however, I am open to changing it if you guys care.

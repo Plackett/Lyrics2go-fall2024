@@ -4,6 +4,7 @@ import { HeaderButton } from '../../components/HeaderButton';
 import { TabBarIcon } from '../../components/TabBarIcon';
 import { colorScheme, useColorScheme } from "nativewind";
 import { Appearance } from "react-native";
+import { DarkTheme } from '@react-navigation/native';
 
 export default function TabLayout() {
   const { setColorScheme } = useColorScheme();
@@ -11,7 +12,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: getColorScheme,
+        tabBarActiveTintColor: "DarkTheme",
       }}>
       <Tabs.Screen
         name="index"

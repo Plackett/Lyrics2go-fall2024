@@ -3,7 +3,7 @@
     "name": "Lyrics2go",
     "slug": "Lyrics2go",
     "version": "1.0.0",
-    "scheme": "Lyrics2go",
+    "scheme": "lyrics2go",
     "web": {
       "bundler": "metro",
       "output": "static",

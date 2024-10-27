@@ -7,15 +7,13 @@ export default function Home() {
   return (
     <>
       <Stack.Screen options={{ title: 'Home' }} />
-      <TouchableOpacity className="h-1/4"/>
-      <Text className='text-4xl ml-auto mr-auto'>Welcome to Lyrics2go!</Text>
-      <TouchableOpacity className="h-1/4"/>
-      <Link href="../login" asChild>
+      <Text className='text-4xl ml-auto mr-auto mt-auto'>Welcome to Lyrics2go!</Text>
+      <Link className='mt-auto' href="../login" asChild>
         <Pressable>
           <Text className="text-2xl pt-2 pb-2 text-center justify-center bg-blue-600 text-slate-200 w-auto ml-10 mr-10 rounded-full">Log in</Text>
         </Pressable>
       </Link>
-      <Link href="../signup" asChild>
+      <Link href="../signup" className='mb-auto'asChild>
         <Pressable>
           <Text className="text-2xl pt-2 pb-2 text-center justify-center border-solid border-5 hover:border-10 border-black w-auto ml-10 mr-10 rounded-full">Sign up</Text>
         </Pressable>

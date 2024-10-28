@@ -7,6 +7,7 @@ import { HeaderButton } from '../../components/HeaderButton';
 import { colorScheme, useColorScheme } from "nativewind";
 import { Appearance } from "react-native";
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
+import { StyleSheet } from 'nativewind';
 import Home from '.';
 import Account from './account'
 import Playlists from './playlists';
@@ -17,7 +18,12 @@ const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator
       initialRouteName='Home'
-      screenOptions={{drawerActiveTintColor: "#1aa3ff"}}
+      screenOptions={{
+        drawerActiveTintColor: "#1aa3ff",
+        headerStyle: {
+          backgroundColor: '#1aa3ff'
+        }
+      }}
       >
       <Drawer.Screen
         name="Home"
@@ -34,3 +40,12 @@ const Drawer = createDrawerNavigator();
     </Drawer.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 10,
+    width: 200,
+  },
+});

@@ -1,45 +1,36 @@
-import { Link, Tabs } from 'expo-router';
+import { Link } from 'expo-router';
+import React from 'react';
 
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HeaderButton } from '../../components/HeaderButton';
-import { TabBarIcon } from '../../components/TabBarIcon';
 import { colorScheme, useColorScheme } from "nativewind";
 import { Appearance } from "react-native";
-import { DarkTheme } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
+import Home from '.';
+import Account from './account'
+import Playlists from './playlists';
 
-export default function TabLayout() {
-  const { setColorScheme } = useColorScheme();
-  setColorScheme("system");
+const Drawer = createDrawerNavigator();
+
+ export default function DrawerNavigation() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "DarkTheme",
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <HeaderButton />
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="playlists"
-        options={{
-          title: 'Playlists',
-          tabBarIcon: ({ color }) => <TabBarIcon name="music" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="account"
-        options={{
-          title: 'Account',
-          tabBarIcon: ({ color }) => <TabBarIcon name="group" color={color} />,
-        }}
-      />
-    </Tabs>
+    <Drawer.Navigator
+      initialRouteName='Home'
+      screenOptions={{drawerActiveTintColor: "#1aa3ff"}}
+      >
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        />
+        <Drawer.Screen
+          name="Playlists"
+          component={Playlists}
+          />
+        <Drawer.Screen
+          name="Account"
+          component={Account}
+          />
+    </Drawer.Navigator>
   );
-}
+};

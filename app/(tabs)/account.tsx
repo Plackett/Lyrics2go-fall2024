@@ -10,7 +10,7 @@ export default function Account() {
   return (
     <>
       <Stack.Screen options={{ title: 'Account' }} />
-      <View className="justify-center items-center w-full h-full dark:bg-slate-950" >
+      <View className="justify-center items-center w-full h-full dark:bg-slate-950 bg-" >
         <Text className="text-1xl dark:text-slate-200">Your account details will appear here when you log in.</Text>
       </View>
     </>

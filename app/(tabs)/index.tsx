@@ -2,8 +2,15 @@ import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { colorScheme, useColorScheme } from "nativewind";
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import React from 'react';
+import Account from './account'
+import Playlists from './playlists';
+import Home from './home';
 
-export default function Home() {
+export default function App() {
   const [text, setText] = useState('');
 
   const handleInputChange = (input) => {

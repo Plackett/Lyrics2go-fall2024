@@ -7,7 +7,7 @@ import { HeaderButton } from '../../components/HeaderButton';
 import { colorScheme, useColorScheme } from "nativewind";
 import { Appearance } from "react-native";
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'nativewind';
+import { StyleSheet } from 'react-native';
 import Home from '.';
 import Account from './account'
 import Playlists from './playlists';

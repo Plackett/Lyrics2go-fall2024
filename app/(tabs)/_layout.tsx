@@ -10,7 +10,6 @@ import { DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import Home from '.';
 import Account from './account'
-import Playlists from './playlists';
 
 const Drawer = createDrawerNavigator();
 
@@ -29,10 +28,6 @@ const Drawer = createDrawerNavigator();
         name="Home"
         component={Home}
         />
-        <Drawer.Screen
-          name="Playlists"
-          component={Playlists}
-          />
         <Drawer.Screen
           name="Account"
           component={Account}

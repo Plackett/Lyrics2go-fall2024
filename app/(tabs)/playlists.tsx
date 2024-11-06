@@ -1,3 +1,5 @@
+// THIS PAGE HAS BECOME USELESS BECAUSE WE'RE NOT USING PLAYLISTS ANYMORE TBH
+
 import { Stack } from 'expo-router';
 import { View, Text } from 'react-native';
 import { colorScheme, useColorScheme } from "nativewind";

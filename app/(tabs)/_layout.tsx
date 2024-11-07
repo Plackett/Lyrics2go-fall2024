@@ -4,23 +4,31 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HeaderButton } from '../../components/HeaderButton';
-import { colorScheme, useColorScheme } from "nativewind";
 import { Appearance } from "react-native";
 import { DarkTheme, NavigationContainer } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, PlatformColor, useColorScheme } from 'react-native';
 import Home from '.';
 import Account from './account'
+import Lyrics from './lyrics'
 
 const Drawer = createDrawerNavigator();
+
+const colorScheme = useColorScheme();
 
  export default function DrawerNavigation() {
   return (
     <Drawer.Navigator
       initialRouteName='Home'
       screenOptions={{
-        drawerActiveTintColor: "#1aa3ff",
+        drawerStyle: {
+          backgroundColor: colorScheme === 'dark' ? 'black' : 'white'
+        },
+        drawerActiveTintColor: 'orangered',
         headerStyle: {
-          backgroundColor: '#1aa3ff'
+          backgroundColor: 'orangered',
+        },
+        drawerLabelStyle: {
+          color: colorScheme === 'dark' ? 'white': 'black'
         }
       }}
       >
@@ -28,10 +36,14 @@ const Drawer = createDrawerNavigator();
         name="Home"
         component={Home}
         />
-        <Drawer.Screen
-          name="Account"
-          component={Account}
-          />
+      <Drawer.Screen
+        name="Account"
+        component={Account}
+        />
+      <Drawer.Screen
+        name="Lyrics"
+        component={Lyrics}
+        />
     </Drawer.Navigator>
   );
 };

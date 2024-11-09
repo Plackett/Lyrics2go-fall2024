@@ -1,43 +1,58 @@
-import { Link, Tabs } from 'expo-router';
+import { Link } from 'expo-router';
+import React from 'react';
 
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { HeaderButton } from '../../components/HeaderButton';
-import { TabBarIcon } from '../../components/TabBarIcon';
-import { colorScheme, useColorScheme } from "nativewind";
 import { Appearance } from "react-native";
-import { DarkTheme } from '@react-navigation/native';
+import { DarkTheme, NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, PlatformColor, useColorScheme } from 'react-native';
+import Home from '.';
+import Account from './account'
+import Lyrics from './lyrics'
 
-export default function TabLayout() {
+const Drawer = createDrawerNavigator();
+
+const colorScheme = useColorScheme();
+
+ export default function DrawerNavigation() {
   return (
-    <Tabs
+    <Drawer.Navigator
+      initialRouteName='Home'
       screenOptions={{
-        tabBarActiveTintColor: "DarkTheme",
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <HeaderButton />
-            </Link>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="playlists"
-        options={{
-          title: 'Playlists',
-          tabBarIcon: ({ color }) => <TabBarIcon name="music" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="account"
-        options={{
-          title: 'Account',
-          tabBarIcon: ({ color }) => <TabBarIcon name="group" color={color} />,
-        }}
-      />
-    </Tabs>
+        drawerStyle: {
+          backgroundColor: colorScheme === 'dark' ? 'black' : 'white'
+        },
+        drawerActiveTintColor: 'orangered',
+        headerStyle: {
+          backgroundColor: 'orangered',
+        },
+        drawerLabelStyle: {
+          color: colorScheme === 'dark' ? 'white': 'black'
+        }
+      }}
+      >
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        />
+      <Drawer.Screen
+        name="Account"
+        component={Account}
+        />
+      <Drawer.Screen
+        name="Lyrics"
+        component={Lyrics}
+        />
+    </Drawer.Navigator>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 10,
+    width: 200,
+  },
+});

@@ -30,7 +30,7 @@ export default function Home() {
   }
 
   const handleSubmit = () => {
-    router.push('/lyrics');
+    
   }
 
   const { setColorScheme } = useColorScheme();

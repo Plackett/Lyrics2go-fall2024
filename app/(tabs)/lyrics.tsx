@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ActivityIndicator, ScrollView, Linking } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  ActivityIndicator,
+  ScrollView,
+  Linking,
+  StyleSheet,
+} from 'react-native';
 import standsConfig from '../stands-config';
 
 const LyricsScreen = () => {
@@ -10,6 +19,11 @@ const LyricsScreen = () => {
   const [error, setError] = useState('');
 
   const fetchLyrics = async () => {
+    if (!artist.trim() || !song.trim()) {
+      setError('Please enter both artist and song.');
+      return;
+    }
+
     setLoading(true);
     setError('');
     setResults([]);
@@ -18,98 +32,168 @@ const LyricsScreen = () => {
       const response = await fetch(
         `https://www.stands4.com/services/v2/lyrics.php?uid=${standsConfig.uid}&tokenid=${standsConfig.key}&term=${encodeURIComponent(
           song
-        )}&artist=${encodeURIComponent(artist)}&format=xml`
+        )}&artist=${encodeURIComponent(artist)}&format=json`
       );
 
       if (!response.ok) throw new Error('Failed to fetch lyrics');
-      const text = await response.text();
+      const data = await response.json();
 
-      // Simple regex to parse the XML result
-      const resultRegex = /<result>[\s\S]*?<\/result>/g;
-      const songData = [...text.matchAll(resultRegex)];
-
-      const parsedResults = songData.map((item) => {
-        const songName = item[0].match(/<song>(.*?)<\/song>/)?.[1];
-        const artistName = item[0].match(/<artist>(.*?)<\/artist>/)?.[1];
-        const albumName = item[0].match(/<album>(.*?)<\/album>/)?.[1];
-        const songLink = item[0].match(/<song-link>(.*?)<\/song-link>/)?.[1];
-        const albumLink = item[0].match(/<album-link>(.*?)<\/album-link>/)?.[1];
-        const artistLink = item[0].match(/<artist-link>(.*?)<\/artist-link>/)?.[1];
-
-        return {
-          songName,
-          artistName,
-          albumName,
-          songLink,
-          albumLink,
-          artistLink,
-        };
-      });
-
-      setResults(parsedResults);
+      if (data && data.result) {
+        const resultsArray = Array.isArray(data.result)
+          ? data.result
+          : [data.result];
+        setResults(resultsArray);
+      } else {
+        setError('No results found.');
+      }
     } catch (err) {
       setError('Could not fetch lyrics. Please try again.');
+      console.error(err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <View className="flex-1 p-4 bg-white">
-      <Text className="text-xl font-bold text-center mb-4">Find Song Lyrics</Text>
-      
+    <View style={styles.container}>
+      <Text style={styles.title}>Find Song Lyrics</Text>
+
       <TextInput
-        className="border border-gray-400 p-2 mb-4 rounded"
+        style={styles.input}
         placeholder="Artist name"
         value={artist}
         onChangeText={setArtist}
+        placeholderTextColor="#666"
       />
-      
+
       <TextInput
-        className="border border-gray-400 p-2 mb-4 rounded"
+        style={styles.input}
         placeholder="Song title"
         value={song}
         onChangeText={setSong}
+        placeholderTextColor="#666"
       />
-      
+
       <Button title="Get Lyrics" onPress={fetchLyrics} disabled={loading} />
 
-      {loading && <ActivityIndicator className="mt-4" size="large" color="#0000ff" />}
-      
+      {loading && (
+        <ActivityIndicator style={styles.loader} size="large" color="#0000ff" />
+      )}
+
       {error ? (
-        <Text className="text-red-500 mt-4">{error}</Text>
+        <Text style={styles.error}>{error}</Text>
       ) : (
-        <ScrollView className="mt-4 bg-gray-100 p-4 rounded-md">
+        <ScrollView style={styles.resultsContainer}>
           {results.length > 0 ? (
             results.map((result, index) => (
-              <View key={index} className="mb-4">
-                <Text className="text-lg font-semibold">{result.songName}</Text>
-                <Text className="text-sm text-gray-700">Artist: {result.artistName}</Text>
-                <Text className="text-sm text-gray-700">Album: {result.albumName}</Text>
+              <View key={index} style={styles.resultItem}>
+                <Text style={styles.songTitle}>{result.song}</Text>
+                <Text style={styles.artistName}>Artist: {result.artist}</Text>
+                {result.album && (
+                  <Text style={styles.albumName}>Album: {result.album}</Text>
+                )}
 
-                <View className="flex-row space-x-2 mt-2 gap-x-2 rounded-lg">
-                  <Button
-                    title="Open Lyrics"
-                    onPress={() => Linking.openURL(result.songLink)}
-                  />
-                  <Button
-                    title="Link to Artist"
-                    onPress={() => Linking.openURL(result.artistLink)}
-                  />
-                  <Button
-                    title="Link to Album"
-                    onPress={() => Linking.openURL(result.albumLink)}
-                  />
+                {result.lyrics && (
+                  <Text style={styles.lyricsText}>{result.lyrics}</Text>
+                )}
+
+                <View style={styles.buttonContainer}>
+                  {result.song_link && (
+                    <Button
+                      title="View on Web"
+                      onPress={() => Linking.openURL(result.song_link)}
+                    />
+                  )}
+                  {result.artist_link && (
+                    <Button
+                      title="Artist Info"
+                      onPress={() => Linking.openURL(result.artist_link)}
+                    />
+                  )}
+                  {result.album_link && (
+                    <Button
+                      title="Album Info"
+                      onPress={() => Linking.openURL(result.album_link)}
+                    />
+                  )}
                 </View>
               </View>
             ))
           ) : (
-            <Text>No results found</Text>
+            <Text style={styles.noResults}>No results found</Text>
           )}
         </ScrollView>
       )}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
+    fontSize: 16,
+  },
+  loader: {
+    marginTop: 16,
+  },
+  error: {
+    color: 'red',
+    marginTop: 16,
+  },
+  resultsContainer: {
+    marginTop: 16,
+  },
+  resultItem: {
+    marginBottom: 16,
+    padding: 12,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
+  },
+  songTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  artistName: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 4,
+  },
+  albumName: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 12,
+  },
+  lyricsText: {
+    marginTop: 8,
+    fontSize: 16,
+    color: '#333',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 12,
+  },
+  noResults: {
+    textAlign: 'center',
+    color: '#666',
+    fontSize: 16,
+  },
+});
 
 export default LyricsScreen;

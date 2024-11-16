@@ -1,5 +1,5 @@
 import { Stack, useNavigation } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { colorScheme, useColorScheme } from "nativewind";
 import 'react-native-gesture-handler';
@@ -24,7 +24,10 @@ export default function Home() {
   }
 
   const { setColorScheme } = useColorScheme();
-  setColorScheme("system");
+  
+  useEffect(() => {
+    setColorScheme("system");
+  }, [setColorScheme]);
 
   return (
     <>

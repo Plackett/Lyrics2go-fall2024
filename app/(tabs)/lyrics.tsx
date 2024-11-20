@@ -59,15 +59,15 @@ const LyricsScreen = () => {
       <Text className="text-xl font-bold text-center mb-4">Find Song Lyrics</Text>
       
       <TextInput
-        className="border border-gray-400 p-2 mb-4 rounded"
-        placeholder="Artist name"
+        className="border border-gray-400 text-black placeholder-current p-2 mb-4 rounded"
+        placeholder="Artist"
         value={artist}
         onChangeText={setArtist}
       />
       
       <TextInput
-        className="border border-gray-400 p-2 mb-4 rounded"
-        placeholder="Song title"
+        className="border border-gray-400 text-black placeholder-current p-2 mb-4 rounded"
+        placeholder="Song Name"
         value={song}
         onChangeText={setSong}
       />
@@ -91,10 +91,6 @@ const LyricsScreen = () => {
                   <Button
                     title="Open Lyrics"
                     onPress={() => Linking.openURL(result.songLink)}
-                  />
-                  <Button
-                    title="Link to Artist"
-                    onPress={() => Linking.openURL(result.artistLink)}
                   />
                   <Button
                     title="Link to Album"

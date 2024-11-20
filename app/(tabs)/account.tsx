@@ -4,7 +4,7 @@ import { Pressable, Text } from 'react-native';
 export default function Account() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen options={{ title: 'Account' }} />
       <Text className='text-4xl ml-auto mr-auto mt-auto'>Welcome to Lyrics2go!</Text>
       <Link className='mt-auto' href="../login" asChild>
         <Pressable>

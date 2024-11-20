@@ -1,13 +1,7 @@
-import * as React from "react"
-import Svg, { Rect, G, Path, Defs, ClipPath } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Rect, G, Path, Defs, ClipPath } from 'react-native-svg';
 const GoogleSU = (props) => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={179}
-    height={40}
-    fill="none"
-    {...props}
-  >
+  <Svg xmlns="http://www.w3.org/2000/svg" width={179} height={40} fill="none" {...props}>
     <Rect width={178} height={39} x={0.5} y={0.5} fill="#fff" rx={3.5} />
     <G clipPath="url(#a)">
       <Path
@@ -38,5 +32,5 @@ const GoogleSU = (props) => (
       </ClipPath>
     </Defs>
   </Svg>
-)
-export default GoogleSU
+);
+export default GoogleSU;

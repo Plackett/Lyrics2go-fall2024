@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { firebase } from './firebase-config';
 
-export function useAuth()
-{
-    const [user, setUser] = useState(null);
+export function useAuth() {
+  const [user, setUser] = useState(null);
 
-    // firebase stuff, ignore
-    useEffect(() => {
+  // firebase stuff, ignore
+  useEffect(() => {
     // Set up Firebase authentication listener
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -17,7 +16,7 @@ export function useAuth()
     });
 
     return () => unsubscribe();
-    }, []);
+  }, []);
 
-    return user;
+  return user;
 }

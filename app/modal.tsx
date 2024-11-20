@@ -6,8 +6,10 @@ import { ScreenContent } from '~/components/ScreenContent';
 export default function Modal() {
   return (
     <>
-      <View className="w-full h-full justify-center">
-        <Text className="text-2xl ml-auto mr-auto">More information will be written here in the future</Text>
+      <View className="h-full w-full justify-center">
+        <Text className="ml-auto mr-auto text-2xl">
+          More information will be written here in the future
+        </Text>
       </View>
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </>

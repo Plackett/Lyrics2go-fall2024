@@ -6,7 +6,6 @@ import { firebase } from './firebase-config.js';
 import GoogleSI from './google-SI';
 
 export default function Login() {
-
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -18,33 +17,37 @@ export default function Login() {
       Alert.alert('Success', 'Logged in successfully!');
       router.push('/');
     } catch (error) {
-      Alert.alert('Error', 'Error logging in, please try again later. Code: ' + error.message );
+      Alert.alert('Error', 'Error logging in, please try again later. Code: ' + error.message);
     }
   };
 
   return (
     <>
-      <View className="w-full h-full justify-center">
-        <Text className="text-2xl ml-auto mr-auto mt-auto mb-1">Welcome back</Text>
-        <Text className="text-xl ml-auto mr-auto mb-1 text-gray-400">Please enter your details to sign in.</Text>
+      <View className="h-full w-full justify-center">
+        <Text className="mb-1 ml-auto mr-auto mt-auto text-2xl">Welcome back</Text>
+        <Text className="mb-1 ml-auto mr-auto text-xl text-gray-400">
+          Please enter your details to sign in.
+        </Text>
         <Pressable className="ml-auto mr-auto">
           <GoogleSI />
         </Pressable>
         <TextInput
           placeholder="Email"
-          className="ml-10 rounded-sm text-2xl pt-2 pb-2 border-solid border-black border-5 pl-1.5"
+          className="border-5 ml-10 rounded-sm border-solid border-black pb-2 pl-1.5 pt-2 text-2xl"
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
         />
         <TextInput
           placeholder="Password"
-          className="ml-10 rounded-sm text-2xl pt-2 pb-2 border-solid border-black border-5 pl-1.5 mb-1"
+          className="border-5 mb-1 ml-10 rounded-sm border-solid border-black pb-2 pl-1.5 pt-2 text-2xl"
           secureTextEntry={true}
           value={password}
           onChangeText={setPassword}
         />
-        <Pressable onPress={handleLogin} className="mr-auto ml-auto rounded-full bg-blue-600 pl-10 pr-10 pb-1 pt-1 mb-auto">
+        <Pressable
+          onPress={handleLogin}
+          className="mb-auto ml-auto mr-auto rounded-full bg-blue-600 pb-1 pl-10 pr-10 pt-1">
           <Text className="text-2xl text-slate-200">Log In</Text>
         </Pressable>
       </View>

@@ -4,6 +4,7 @@
     "slug": "lyrics2go",
     "version": "1.0.0",
     "scheme": "lyrics2go",
+    "newArchEnabled": true,
     "web": {
       "bundler": "metro",
       "output": "static",

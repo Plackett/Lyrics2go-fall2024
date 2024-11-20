@@ -1,6 +1,6 @@
-import { Stack, useRouter } from 'expo-router';
+import { Link, Stack, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Pressable } from 'react-native';
 import { colorScheme, useColorScheme } from "nativewind";
 import 'react-native-gesture-handler';
 import React from 'react';
@@ -30,7 +30,7 @@ export default function Home() {
   }
 
   const handleSubmit = () => {
-    
+    router.push('./lyrics');
   }
 
   const { setColorScheme } = useColorScheme();
@@ -48,10 +48,16 @@ export default function Home() {
       ) : (
         <Text className='text-4xl ml-auto mr-auto top-1/4'>Welcome to Lyrics2go!</Text>
       )}
-      <View className='flex p-6 w-full h-full justify-center items-center'>
-        <TextInput className="border-black border-2 pl-1.5 pr-1.5 size-auto font-black text-3xl rounded-2xl bg-blue-400" onChangeText={handleInputChange} value={text} placeholder="Enter the name of a song"/>
-        <Button title="Search" onPress={handleSubmit}/>
-      </View>
+      <Link className='mt-auto' href="../login" asChild>
+        <Pressable>
+          <Text className="text-2xl pt-2 pb-2 text-center justify-center bg-blue-600 text-slate-200 w-auto ml-10 mr-10 rounded-full">Log in</Text>
+        </Pressable>
+      </Link>
+      <Link href="../signup" className='mb-auto'asChild>
+        <Pressable>
+          <Text className="text-2xl pt-2 pb-2 text-center justify-center border-solid border-5 hover:border-10 border-black w-auto ml-10 mr-10 rounded-full">Sign up</Text>
+        </Pressable>
+      </Link>
     </>
   );
 }

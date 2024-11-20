@@ -1,13 +1,7 @@
-import * as React from "react"
-import Svg, { Rect, G, Path, Defs, ClipPath } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Rect, G, Path, Defs, ClipPath } from 'react-native-svg';
 const GoogleSI = (props) => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={175}
-    height={40}
-    fill="none"
-    {...props}
-  >
+  <Svg xmlns="http://www.w3.org/2000/svg" width={175} height={40} fill="none" {...props}>
     <Rect width={174} height={39} x={0.5} y={0.5} fill="#fff" rx={3.5} />
     <G clipPath="url(#a)">
       <Path
@@ -38,5 +32,5 @@ const GoogleSI = (props) => (
       </ClipPath>
     </Defs>
   </Svg>
-)
-export default GoogleSI
+);
+export default GoogleSI;
